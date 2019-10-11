@@ -5,7 +5,14 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   // 配置路由表
-  routes: []
+  routes: [
+    // 登录页面
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import('../views/login')
+    }
+  ]
 })
 
 export default router
