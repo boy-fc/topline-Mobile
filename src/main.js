@@ -12,7 +12,9 @@ import {
   Field,
   Icon,
   Button,
-  Toast
+  Toast,
+  Cell,
+  CellGroup
 } from 'vant' // 登录导航栏
 
 Vue.config.productionTip = false
@@ -23,6 +25,8 @@ Vue
   .use(Icon)
   .use(Button)
   .use(Toast)
+  .use(Cell)
+  .use(CellGroup)
 
 new Vue({
   router,

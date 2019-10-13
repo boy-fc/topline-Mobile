@@ -11,7 +11,7 @@
                 </ValidationProvider>
                 <ValidationProvider name="验证码" rules="required" v-slot="{ errors }">
                     <van-field required v-model="user.code" label='验证码' center type='password' placeholder="请输入短信验证码" :error-message="errors[0]">
-                        <van-button slot="button" type="info" round="true" color="#ededed">获取验证码</van-button>
+                        <van-button slot="button" type="info" :round="true" color="#ededed">获取验证码</van-button>
                     </van-field>
                  </ValidationProvider>
             </van-cell-group>
@@ -25,6 +25,7 @@
 
 <script>
 import { login } from '@/api/user'
+import { setItem } from '@/utils/storage'
 export default {
   name: 'LoginIndex',
   data () {
@@ -50,7 +51,12 @@ export default {
           return
         }
         // 请求提交表单数据
-        await login(this.user)
+        const { data } = await login(this.user)
+        // 把token令牌储存到store容器中
+        this.$store.commit('setUser', data.data)
+        // 讲token令牌进行本地存储，防止刷新丢失
+        setItem('user', data.data)
+        // 轻提示
         this.$toast.success('登录成功')
       } catch (err) { // 所有大于等于 400 的状态码都会进入 catch
         if (err.response && err.response.status === 400) {
