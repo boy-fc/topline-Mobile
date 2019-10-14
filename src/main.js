@@ -14,7 +14,12 @@ import {
   Button,
   Toast,
   Cell,
-  CellGroup
+  CellGroup,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  List
 } from 'vant' // 登录导航栏
 
 Vue.config.productionTip = false
@@ -27,6 +32,11 @@ Vue
   .use(Toast)
   .use(Cell)
   .use(CellGroup)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Tab)
+  .use(Tabs)
+  .use(List)
 
 new Vue({
   router,

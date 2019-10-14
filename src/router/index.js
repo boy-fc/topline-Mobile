@@ -11,6 +11,18 @@ const router = new VueRouter({
       name: 'login',
       path: '/login',
       component: () => import('../views/login')
+    },
+    // 首页
+    {
+      path: '/',
+      component: () => import('../views/tabbar'),
+      children: [
+        {
+          name: 'home',
+          path: '/',
+          component: () => import('../views/home')
+        }
+      ]
     }
   ]
 })

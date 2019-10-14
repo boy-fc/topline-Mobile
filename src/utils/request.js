@@ -13,6 +13,7 @@ const request = axios.create({
 request.defaults.transformResponse = [function (data) {
   return data ? JSONbig.parse(data) : {}
 }]
+
 // 请求拦截器
 request.interceptors.request.use(function (config) {
   // 在发起请求请做一些业务处理
@@ -30,6 +31,7 @@ request.interceptors.request.use(function (config) {
   // 对请求失败做处理
   return Promise.reject(error)
 })
+
 // 响应拦截器
 
 export default request
