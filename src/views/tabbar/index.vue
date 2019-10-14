@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang='less' scroped>
+<style lang='less'>
 .van-tabbar {
   height: 98px;
   .van-tabbar-item__text {

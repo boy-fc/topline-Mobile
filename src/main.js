@@ -19,7 +19,13 @@ import {
   TabbarItem,
   Tab,
   Tabs,
-  List
+  List,
+  PullRefresh,
+  Grid,
+  GridItem,
+  ImagePreview,
+  Image,
+  Lazyload
 } from 'vant' // 登录导航栏
 
 Vue.config.productionTip = false
@@ -37,6 +43,12 @@ Vue
   .use(Tab)
   .use(Tabs)
   .use(List)
+  .use(PullRefresh)
+  .use(Grid)
+  .use(GridItem)
+  .use(ImagePreview)
+  .use(Image)
+  .use(Lazyload)
 
 new Vue({
   router,
