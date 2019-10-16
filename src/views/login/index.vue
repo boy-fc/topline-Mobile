@@ -68,8 +68,8 @@ export default {
 }
 </script>
 
-<style lang='less' scroped>
-.van-cell{
+<style lang='less' scoped>
+/deep/ .van-cell{
     width: 750px;
     height: 91px;
     font-size: 26px;
@@ -77,7 +77,7 @@ export default {
     .van-field__label{
         margin-right: 39px;
     }
-    .van-button{
+    /deep/.van-button{
         width: 152px;
         height: 46px;
         margin-right: 10px;
@@ -87,12 +87,12 @@ export default {
         }
     }
 }
-.van-cell--required::before {
+/deep/ .van-cell--required::before {
       left: 30px;
 }
 .login{
     margin-left: 28px;
-    .van-button{
+    /deep/ .van-button{
         width: 694px;
         height: 88px;
         font-size: 30px;

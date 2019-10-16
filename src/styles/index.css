@@ -3,7 +3,7 @@
   height: 128px;
   background-color: #3296FA;
 }
-.van-nav-bar .van-nav-bar__title {
+.van-nav-bar /deep/ .van-nav-bar__title {
   font-size: 32px;
   padding-top: 67px;
   color: #fff;

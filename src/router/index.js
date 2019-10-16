@@ -23,6 +23,18 @@ const router = new VueRouter({
           component: () => import('../views/home')
         }
       ]
+    },
+    // 搜索
+    {
+      name: 'search',
+      path: '/search',
+      component: () => import('../views/search')
+    },
+    // 搜索结果
+    {
+      name: 'search-result',
+      path: '/search/:q',
+      component: () => import('../views/search-result')
     }
   ]
 })

@@ -1,7 +1,10 @@
 <template>
     <div>
         <!-- 顶部导航栏 -->
-        <van-nav-bar title="首页" fixed/>
+        <van-nav-bar fixed>
+          <van-button type="info" slot="title" round @click="$router.push('/search')" size="large">搜索
+         </van-button>
+        </van-nav-bar>
         <!-- 频道列表 -->
         <van-tabs v-model="active" animated swipeable>
           <!-- 面包屑按钮 -->
@@ -169,7 +172,7 @@ export default {
     onMyChannelClick (index) {
       if (this.isEditShow) {
         // 如果是编辑状态，删除频道
-        this.channels.splice(index, 1)
+        this.channels.splice(index + 1, 1)
       } else {
         // 如果是非编辑状态，切换频道展示
         // 切换当前激活的频道
@@ -211,42 +214,42 @@ export default {
 }
 </script>
 
-<style lang='less'>
-.van-tabs--line .van-tabs__wrap {
+<style lang='less' scoped>
+/deep/ .van-tabs--line .van-tabs__wrap {
     position: fixed;
     top: 128px;
     left: 0;
     right: 0;
     z-index: 2;
     height: 82px;
-    .van-tab{
+    /deep/.van-tab{
       line-height: 82px;
       font-size: 30px;
       color:#333;
-      .van-tabs__content {
+      /deep/ .van-tabs__content {
         margin-top: 210px;
       }
     }
-    .van-tabs__line{
+    /deep/.van-tabs__line{
       background-color:#3296FA;
       height: 6px;
       width: 31px
     }
 }
-.van-tabs .van-tabs__content {
+/deep/.van-tabs .van-tabs__content {
     margin-top: 210px;
 }
-.van-cell:not(:last-child)::after{
+/deep/ .van-cell:not(:last-child)::after{
     border-bottom: 1px solid #999;
 }
-.van-cell {
+/deep/.van-cell {
   font-size: 32px;
   color:#3A3A3A;
   line-height: 50px;
   .van-grid-item__content{
     padding: 16px 2px;
   }
-  .article-info {
+  /deep/.article-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -265,7 +268,7 @@ export default {
   top: 150px;
   background-color: #fff;
 }
-.van-popup{
+/deep/ .van-popup{
   // 弹层频道列表-关闭图标
   .van-popup__close-icon {
       font-size: 28px;
@@ -275,7 +278,7 @@ export default {
   .channel-container {
     margin-top: 52px;
     // 编辑按钮
-    .van-cell {
+    /deep/.van-cell {
       margin-bottom: 25px;
         .van-button--danger{
         height: 40px;
@@ -301,5 +304,20 @@ export default {
     }
   }
 }
-
+// 搜索栏
+.van-nav-bar {
+   /deep/ .van-nav-bar__title{
+    padding-top: 52px;
+    max-width: 100%;
+    .van-button--large {
+      width: 555px;
+      height: 64px;
+      line-height: 64px;
+      background: #5babfb;
+      .van-button__text {
+        font-size: 28px;
+      }
+    }
+  }
+}
 </style>
