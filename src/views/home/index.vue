@@ -47,7 +47,9 @@
               </van-cell>
             <!-- 我的频道 -->
             <van-grid :gutter='10'>
-              <van-grid-item v-for="(channel,index) in channels" @click="onMyChannelClick(index)"
+              <!-- 推荐频道 -->
+               <van-grid-item text="推荐" @click="switchChannel(0)" />
+              <van-grid-item v-for="(channel,index) in channels.slice(1)" @click="onMyChannelClick(index)"
               :key="index" :text="channel.name">
                 <van-icon name="close" class="close-icon" slot="icon" v-show="isEditShow"/>
               </van-grid-item>
@@ -89,6 +91,20 @@ export default {
     }
   },
   methods: {
+    // 频道数据处理函数
+    dealChannels (channels) {
+      //   定制频道的数据内容
+      channels.forEach(channel => {
+        // 频道的文章列表
+        channel.articles = []
+        // 频道的上啦加载更多的loading状态
+        channel.loading = false
+        // 频道的加载结束时的状态
+        channel.finished = false
+        channel.timestamp = null // 存储获取频道下一页的时间戳
+        channel.isPullDownLoading = false // 存储频道的下拉刷新 loading 状态
+      })
+    },
     //   获取频道列表
     async loadChannels () {
       let channels = []
@@ -102,18 +118,7 @@ export default {
         const { data } = await getDefaultChannels()
         channels = data.data.channels
       }
-
-      //   定制频道的数据内容
-      channels.forEach(channel => {
-        // 频道的文章列表
-        channel.articles = []
-        // 频道的上啦加载更多的loading状态
-        channel.loading = false
-        // 频道的加载结束时的状态
-        channel.finished = false
-        channel.timestamp = null // 存储获取频道下一页的时间戳
-        channel.isPullDownLoading = false // 存储频道的下拉刷新 loading 状态
-      })
+      this.dealChannels(channels)
       this.channels = channels
     },
     async onLoad () {
@@ -151,7 +156,9 @@ export default {
     // 获取所有频道列表
     async loadAllChannels () {
       const { data } = await getAllChannels()
-      this.allChannels = data.data.channels
+      const channels = data.data.channels
+      this.dealChannels(channels)
+      this.allChannels = channels
     },
     // 添加频道
     onAddChannel (channel) {
@@ -166,10 +173,13 @@ export default {
       } else {
         // 如果是非编辑状态，切换频道展示
         // 切换当前激活的频道
-        this.active = index
-        // 关闭频道弹层
-        this.isChannelEditShow = false
+        this.switchChannel(index + 1)
       }
+    },
+    // 切换频道
+    switchChannel (index) {
+      this.active = index
+      this.isChannelEditShow = false
     }
   },
   computed: {
