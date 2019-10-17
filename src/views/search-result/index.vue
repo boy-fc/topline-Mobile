@@ -54,7 +54,7 @@ export default {
       // 3. 结束 loading
       this.loading = false
       // 4. 判断是否还有数据
-      if (data.data.page) {
+      if (data.data.results.length) {
         // 如果有，更新页码
         this.page++
       } else {

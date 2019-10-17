@@ -35,6 +35,12 @@ const router = new VueRouter({
       name: 'search-result',
       path: '/search/:q',
       component: () => import('../views/search-result')
+    },
+    // 文章详情
+    {
+      name: 'article',
+      path: '/article/:articleID',
+      component: () => import('../views/article')
     }
   ]
 })

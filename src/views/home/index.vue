@@ -17,7 +17,13 @@
                 <van-list v-model="channel.loading" :finished="channel.finished"
                     finished-text="没有更多了" @load="onLoad">
                     <!-- 数据列表 -->
-                    <van-cell v-for="(article, index) in channel.articles" :key="index" :title="article.title">
+                    <van-cell v-for="(article, index) in channel.articles" :key="index"
+                    :title="article.title" @click="$router.push({
+                            name: 'article',
+                            params: {
+                              articleID: article.art_id.toString()
+                            }
+                          })">
                       <div slot="label">
                         <van-grid :border="false" :column-num="3">
                           <van-grid-item v-for="(img, index) in article.cover.images" :key="index">

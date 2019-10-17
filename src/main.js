@@ -27,7 +27,8 @@ import {
   Image,
   Lazyload,
   Popup,
-  Search
+  Search,
+  Loading
 } from 'vant' // 登录导航栏
 
 Vue.config.productionTip = false
@@ -53,6 +54,7 @@ Vue
   .use(Lazyload)
   .use(Popup)
   .use(Search)
+  .use(Loading)
 
 new Vue({
   router,

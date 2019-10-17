@@ -17,3 +17,22 @@ export const login = ({ mobile, code }) => {
     }
   })
 }
+
+// 关注用户
+export function followUser (userID) {
+  return request({
+    method: 'POST',
+    url: '/app/v1_0/user/followings',
+    data: {
+      target: userID
+    }
+  })
+}
+
+// 取消关注用户
+export function unFollowUser (userID) {
+  return request({
+    method: 'DELETE',
+    url: '/app/v1_0/user/followings/' + userID
+  })
+}
