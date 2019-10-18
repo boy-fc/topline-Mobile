@@ -50,15 +50,24 @@
       <p>网络超时，点击 <a href="#" @click.prevent="loadArticle">刷新</a> 试一试。</p>
     </div>
     <!-- /加载失败的消息提示 -->
+
+     <!-- 文章评论 -->
+      <article-comment :articleId="$route.params.articleId"/>
+    <!-- /文章评论 -->
   </div>
 </template>
 
 <script>
+// 注册文章评论组件
+import ArticleComment from './components/article-comment'
 import { getArticle, likings, unLikings, dislike, unDislike } from '@/api/article'
 import { followUser, unFollowUser } from '@/api/user'
 import '@/utils/date'
 export default {
   name: 'ArticleIndex',
+  components: {
+    ArticleComment
+  },
   data () {
     return {
       loading: true, // 控制加载中的 loading 状态
@@ -71,7 +80,7 @@ export default {
     async loadArticle () {
       this.loading = true
       try {
-        const { data } = await getArticle(this.$route.params.articleID)
+        const { data } = await getArticle(this.$route.params.articleId)
         this.article = data.data
       } catch (err) {
         //   如果请求失败，就意味着数据加载失败

@@ -21,7 +21,7 @@
                     :title="article.title" @click="$router.push({
                             name: 'article',
                             params: {
-                              articleID: article.art_id.toString()
+                              articleId: article.art_id.toString()
                             }
                           })">
                       <div slot="label">

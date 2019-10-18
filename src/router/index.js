@@ -39,7 +39,7 @@ const router = new VueRouter({
     // 文章详情
     {
       name: 'article',
-      path: '/article/:articleID',
+      path: '/article/:articleId',
       component: () => import('../views/article')
     }
   ]
