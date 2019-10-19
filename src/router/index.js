@@ -21,6 +21,12 @@ const router = new VueRouter({
           name: 'home',
           path: '/',
           component: () => import('../views/home')
+        },
+        // 我的
+        {
+          name: 'my',
+          path: '/my',
+          component: () => import('../views/my')
         }
       ]
     },

@@ -19,20 +19,28 @@ export const login = ({ mobile, code }) => {
 }
 
 // 关注用户
-export function followUser (userID) {
+export function followUser (userId) {
   return request({
     method: 'POST',
     url: '/app/v1_0/user/followings',
     data: {
-      target: userID
+      target: userId
     }
   })
 }
 
 // 取消关注用户
-export function unFollowUser (userID) {
+export function unFollowUser (userId) {
   return request({
     method: 'DELETE',
-    url: '/app/v1_0/user/followings/' + userID
+    url: '/app/v1_0/user/followings/' + userId
+  })
+}
+
+// 获取用户自己信息
+export function getUserSelf (userId) {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user'
   })
 }
