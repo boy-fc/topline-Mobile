@@ -27,6 +27,12 @@ const router = new VueRouter({
           name: 'my',
           path: '/my',
           component: () => import('../views/my')
+        },
+        // 编辑个人信息
+        {
+          name: 'user',
+          path: '/user',
+          component: () => import('../views/user')
         }
       ]
     },

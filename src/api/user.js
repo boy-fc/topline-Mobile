@@ -44,3 +44,39 @@ export function getUserSelf (userId) {
     url: '/app/v1_0/user'
   })
 }
+
+// 编辑用户个人资料
+export function getProfile (userId) {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user/profile'
+  })
+}
+
+// 编辑用户照片资料（头像、身份证照片）
+export function updateUserPhoto (data) {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/photo',
+    data
+  })
+}
+
+/**
+ * 更新用户基本信息
+ */
+export const updateUserProfile = ({
+  name,
+  gender,
+  birthday
+}) => {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/profile',
+    data: {
+      name, // 昵称
+      gender, // 性别
+      birthday // 生日
+    }
+  })
+}

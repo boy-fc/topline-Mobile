@@ -28,7 +28,10 @@ import {
   Lazyload,
   Popup,
   Search,
-  Loading
+  Loading,
+  Dialog,
+  ActionSheet,
+  DatetimePicker
 } from 'vant' // 登录导航栏
 
 Vue.config.productionTip = false
@@ -55,6 +58,9 @@ Vue
   .use(Popup)
   .use(Search)
   .use(Loading)
+  .use(Dialog)
+  .use(ActionSheet)
+  .use(DatetimePicker)
 
 new Vue({
   router,
