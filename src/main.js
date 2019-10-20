@@ -7,6 +7,7 @@ import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import zhCN from 'vee-validate/dist/locale/zh_CN' // 加载验证插件的语言包
 import * as rules from 'vee-validate/dist/rules'
 import fastClick from 'fastclick'
+import 'amfe-flexible/index.js'
 
 import {
   NavBar,

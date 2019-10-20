@@ -9,7 +9,7 @@
         <van-tabs v-model="active" animated swipeable>
           <!-- 面包屑按钮 -->
           <div slot="nav-right" class="bread" @click="isChannelEditShow = true">
-             <van-icon name="wap-nav" size="40" />
+             <van-icon name="wap-nav"  class="icon"/>
           </div>
             <van-tab :title="channel.name" v-for="channel in channels" :key="channel.id">
                 <!-- 文章列表 -->
@@ -27,7 +27,7 @@
                       <div slot="label">
                         <van-grid :border="false" :column-num="3">
                           <van-grid-item v-for="(img, index) in article.cover.images" :key="index">
-                            <van-image height="146" width="232" :src="img" lazy-load/>
+                            <van-image class="imageStyle" :src="img" lazy-load/>
                           </van-grid-item>
                         </van-grid>
                          <div class="article-info">
@@ -269,9 +269,12 @@ export default {
 }
 // 面包屑样式
 .bread{
-  position: fixed;
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
   right: 0;
-  top: 150px;
+  height: 82px;
+  padding-top: 22px;
   background-color: #fff;
 }
 /deep/ .van-popup{
@@ -325,5 +328,12 @@ export default {
       }
     }
   }
+}
+/deep/ .icon {
+  font-size: 40px;
+}
+/deep/ .imageStyle {
+  height:146px;
+  width:232px
 }
 </style>

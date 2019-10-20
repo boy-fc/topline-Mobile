@@ -21,8 +21,6 @@
           class="avatar"
           slot="icon"
           round
-          width="4rem"
-          height="4rem"
          :src="item.photo"
         />
         <div class="title">
@@ -151,6 +149,8 @@ export default {
       }
       .avatar {
         margin-right: 5px;
+        width: 70px;
+        height: 70px;
       }
     }
     .reverse {

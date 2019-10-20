@@ -13,9 +13,7 @@
       >
         <van-image
           slot="icon"
-          round
-          width="4rem"
-          height="4rem"
+          round class="imageStyle"
           :src="comment.aut_photo"
         />
         <span style="color: #466b9d;" slot="title">{{comment.aut_name}}</span>
@@ -134,6 +132,10 @@ export default {
 </script>
 
 <style scoped lang='less'>
+/deep/.imageStyle{
+  width:70px;
+  height:70px
+}
 .label {
     color: #363636;
     font-size:25px

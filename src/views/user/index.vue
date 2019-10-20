@@ -10,8 +10,7 @@
       <van-cell title="头像" is-link @click="onChangePhoto">
         <van-image
           round
-          width="4rem"
-          height="4rem"
+          class="imageStyle"
           :src="user.photo"
         />
       </van-cell>
@@ -22,7 +21,7 @@
     <input type="file" ref='file' @change="clickInput" hidden>
 
      <!-- 编辑用户昵称弹窗 -->
-    <van-dialog v-model="isEditNameShow" title="用户昵称" width='500px' height='320px'
+    <van-dialog v-model="isEditNameShow" title="用户昵称" class="dialog"
         show-cancel-button @confirm="onUserNameConfirm">
       <van-field placeholder="请输入用户名" :value="user.name" @input="onUserNameInput"/>
     </van-dialog>
@@ -127,6 +126,10 @@ export default {
 </script>
 
 <style lang='less' scoped>
+/deep/ .imageStyle{
+  height: 70px;
+  width: 70px;
+}
 /deep/ .van-nav-bar .van-icon {
     left: 10px;
     bottom: 10px
@@ -160,7 +163,9 @@ export default {
 }
 // 名称弹层
 /deep/ .van-dialog{
-    height: 200px;
+    width:500px;
+   height:200px;
+    // height: 200px;
     font-size: 25px;
     /deep/ .van-cell{
         font-size: 24px;

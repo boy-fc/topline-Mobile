@@ -7,9 +7,7 @@
       <van-cell title="当前评论" >
         <van-image
           slot="icon"
-          round
-          width="4rem"
-          height="4rem"
+          round class="imageStyle"
           :src="comment.aut_photo"
         />
         <span style="color: #466b9d;" slot="title">{{comment.aut_name}}</span>
@@ -41,8 +39,7 @@
         <van-image
           slot="icon"
           round
-          width="4em"
-          height="4em"
+          class="imageStyle"
           :src="item.aut_photo"
         />
         <span style="color: #466b9d;" slot="title">hello</span>
@@ -149,6 +146,10 @@ export default {
 </script>
 
 <style scoped lang='less'>
+/deep/.imageStyle{
+  width:70px;
+  height:70px
+}
 .dayStyle{
   margin-right: 10px;
   font-size:20px

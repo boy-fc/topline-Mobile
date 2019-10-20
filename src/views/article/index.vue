@@ -18,7 +18,7 @@
     <div class="detail" v-else-if="article.title">
       <h3 class="title">{{article.title}}</h3>
       <div class="author">
-        <van-image round width="4rem" height="4rem" fit="fill" :src="article.aut_photo"/>
+        <van-image round class="imageStyle" fit="fill" :src="article.aut_photo"/>
         <div class="text">
           <p class="name">{{article.aut_name}}</p>
           <p class="time">{{article.pubdate |relativeTime}}</p>
@@ -131,6 +131,10 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.imageStyle{
+  width:70px;
+   height:70px
+}
 .van-nav-bar .van-icon{
     color:#f9f9f9;
     font-size: 35px;
