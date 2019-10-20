@@ -53,6 +53,12 @@ const router = new VueRouter({
       name: 'article',
       path: '/article/:articleId',
       component: () => import('../views/article')
+    },
+    // 聊天机器人
+    {
+      name: 'chat',
+      path: '/chat',
+      component: () => import('../views/chat')
     }
   ]
 })
