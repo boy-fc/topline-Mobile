@@ -1,7 +1,10 @@
 <template>
   <div>
       <!-- 路由出口 -->
+      <keep-alive>
         <router-view />
+      </keep-alive>
+
       <!-- /路由出口 -->
       <!-- 底部导航栏 -->
       <van-tabbar v-model="active">
