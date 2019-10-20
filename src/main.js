@@ -6,6 +6,7 @@ import './styles/index.less'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import zhCN from 'vee-validate/dist/locale/zh_CN' // 加载验证插件的语言包
 import * as rules from 'vee-validate/dist/rules'
+import fastClick from 'fastclick'
 
 import {
   NavBar,
@@ -36,6 +37,7 @@ import {
 
 Vue.config.productionTip = false
 // 组件库注册使用
+
 Vue
   .use(NavBar)
   .use(Field)
@@ -78,3 +80,6 @@ for (let rule in rules) {
 // 注册为全局组件
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
+
+// 解决移动端点击 300ms 延迟
+fastClick.attach(document.body)
