@@ -2,6 +2,8 @@
 import axios from 'axios'
 import JSONbig from 'json-bigint'
 import store from '@/store'
+// import VueRouter from 'vue-router'
+import router from '@/router'
 
 // 配置请求基础路径
 const request = axios.create({
@@ -33,5 +35,55 @@ request.interceptors.request.use(function (config) {
 })
 
 // 响应拦截器
+request.interceptors.response.use(function (response) {
+  // <400的状态码进这里
+  return response
+}, async function (error) { // >=400的状态码进入这里
+  console.dir(error)
+  // 如果状态码是401
+  if (error.response && error.response.status === 401) {
+    const { user } = store.state
+    if (!user) {
+      // 直接跳转到登录页面
+      router.push({
+        name: 'login',
+        query: {
+          redirect: router.currentRoute.fullPath
+          // foo: 'bar'
+        }
+      })
+    } else {
+      try {
+        // 请求获取新的token
+        const { data } = await axios({
+          method: 'PUT',
+          url: 'http://ttapi.research.itcast.cn/app/v1_0/authorizations',
+          headers: {
+            Authorization: `Bearer ${user.refresh_token}`
+          }
+        })
+        // 将最新的token替换原有的token
+        store.commit('setUser', {
+          token: data.data.token, // 最新获取的
+          refresh_token: user.refresh_token // 还是原来的
+        })
+        // 将原来失败的请求发送出去
+        return request(error.config)
+      } catch (err) {
+        console.log(err)
+        // 刷新token获取新的token也失败了，直接跳转到登录页面
+        router.push({
+          name: 'login',
+          query: {
+            redirect: router.currentRoute.fullPath
+            // foo: 'bar'
+          }
+        })
+      }
+    }
+  }
+  // 如果有 refresh_token，则请求刷新 token
+  return Promise.reject(error)
+})
 
 export default request

@@ -13,9 +13,9 @@
     <div class="message-list" ref="message-list">
       <div
         class="message-item"
-        :class="{ reverse: item % 3 === 0 }"
-        v-for="item in 20"
-        :key="item"
+        :class="{ reverse: item.isMe }"
+        v-for="(item,index) in messages"
+        :key="index"
       >
         <van-image
           class="avatar"
@@ -23,10 +23,10 @@
           round
           width="4rem"
           height="4rem"
-          src="https://img.yzcdn.cn/vant/cat.jpeg"
+         :src="item.photo"
         />
         <div class="title">
-          <span>{{ `hello${item}` }}</span>
+          <span>{{item.message}}</span>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
         center
         clearable
       >
-        <van-button slot="button" size="small" type="primary">发送</van-button>
+        <van-button slot="button" size="small" type="info" @click="onSengMessage">发送</van-button>
       </van-field>
     </van-cell-group>
     <!-- /发送消息 -->
@@ -47,15 +47,81 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
+import { getProfile } from '@/api/user'
+import { getItem, setItem } from '@/utils/storage'
 export default {
+  name: 'ChatIndex',
   data () {
     return {
-      message: ''
+      user: {}, // 用户信息对象
+      message: '',
+      socket: null, // 存储socket数据
+      // [ { message: '消息数据', isMe: true, photo: '头像' }, ]
+      messages: getItem('chat-messages') || [] // 存储所有的消息列表
+    }
+  },
+  methods: {
+    // 加载用户信息
+    async getUser () {
+      const { data } = await getProfile()
+      this.user = data.data
+    },
+    onSengMessage () {
+      const message = this.message.trim()
+      if (!message) {
+        return
+      }
+      // 发送消息
+      this.socket.emit('message', {
+        msg: 'message',
+        timestamp: Date.now()
+      })
+      // 把消息储存到消息数组中
+      this.messages.push({
+        message,
+        isMe: true,
+        photo: this.user.photo
+      })
+      // 清空文本框
+      this.message = ''
+    }
+  },
+  created () {
+    // 获取头像
+    this.getUser()
+    // 建立连接
+    const socket = io('http://ttapi.research.itcast.cn')
+    // 把socket储存到data数据中，然后就可以在methods中使用
+    this.socket = socket
+    // 当客户端与服务器建立连接成功时，触发connect 事件
+    socket.on('connect', () => {
+      console.log('建立连接成功')
+    })
+    // 监听既然收服务器消息
+    socket.on('message', data => {
+      console.log('收到服务器消息：', data)
+      this.messages.push({
+        message: data.msg,
+        isMe: false,
+        photo: 'https://img.yzcdn.cn/vant/cat.jpeg'
+      })
+    })
+  },
+  watch: {
+    messages (newValue) {
+      setItem('chat-messages', newValue)
+      // 让列表滚动到最底部
+      const messageList = this.$refs['message-list']
+      this.$nextTick(() => {
+        messageList.scrollTop = messageList.scrollHeight
+      })
     }
   },
 
   mounted () {
-    window.list = this.$refs['message-list']
+    const messageList = this.$refs['message-list']
+    messageList.scrollTop = messageList.scrollHeight
   }
 }
 </script>
@@ -76,8 +142,7 @@ export default {
     .message-item {
       display: flex;
       align-items: center;
-      padding: 5px 30px;
-      height: 100px;
+      padding: 15px 30px;
       font-size: 28px;
       .title {
         background: #fff;
@@ -94,6 +159,11 @@ export default {
         margin-right: 5px;
       }
     }
+  }
+  /deep/ .van-nav-bar .van-icon {
+    font-size: 28px;
+    color:#fff;
+    bottom: 10px;
   }
 
   .send-message {

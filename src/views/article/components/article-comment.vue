@@ -16,15 +16,14 @@
           round
           width="4rem"
           height="4rem"
-          style="margin-right: 30px;"
           :src="comment.aut_photo"
         />
-        <span style="color: #466b9d; font-size:25px" slot="title">{{comment.aut_name}}</span>
+        <span style="color: #466b9d;" slot="title">{{comment.aut_name}}</span>
         <div slot="label">
-          <p style="color: #363636;font-size:25px">{{comment.content}}</p>
+          <p class='label'>{{comment.content}}</p>
           <p>
-            <span style="margin-right: 10px;font-size:20px">{{comment.pubdate| relativeTime}}</span>
-            <van-button size="mini" type="default" style="font-size:20px"
+            <span class='spanStyle'>{{comment.pubdate| relativeTime}}</span>
+            <van-button size="mini" type="default"
              @click="onReplyShow(comment)">回复{{ comment.reply_count }}</van-button>
           </p>
         </div>
@@ -135,8 +134,20 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.label {
+    color: #363636;
+    font-size:25px
+}
+.spanStyle{
+  margin-right: 10px;
+  font-size:20px
+}
 /deep/ .van-cell {
     padding: 20px 50px;
+    font-size: 25px;
+}
+/deep/ .van-image--round{
+  margin-right: 30px;
 }
 .publish-wrap {
   position: fixed;
@@ -159,5 +170,8 @@ export default {
   /deep/ .rightIcon{
       font-size: 30px;
   }
+}
+/deep/ .van-button--mini{
+  font-size: 20px;
 }
 </style>

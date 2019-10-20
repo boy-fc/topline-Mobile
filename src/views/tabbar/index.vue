@@ -4,7 +4,7 @@
         <router-view />
       <!-- /路由出口 -->
       <!-- 底部导航栏 -->
-      <van-tabbar v-model="active" @change=' changeActive'>
+      <van-tabbar v-model="active">
         <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
         <van-tabbar-item icon="search">问答</van-tabbar-item>
         <van-tabbar-item icon="friends-o">视频</van-tabbar-item>
@@ -14,21 +14,11 @@
 </template>
 
 <script>
-import { getItem, setItem } from '@/utils/storage'
 export default {
   name: 'TabbarIndex',
   data () {
     return {
-      active: getItem('active') || 0
-    }
-  },
-  methods: {
-    changeActive (data) {
-      if (!this.$store.state.user) {
-        return
-      }
-      this.active = data
-      setItem('active', data)
+      active: 0
     }
   }
 }

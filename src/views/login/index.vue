@@ -58,6 +58,7 @@ export default {
         setItem('user', data.data)
         // 轻提示
         this.$toast.success('登录成功')
+        this.$router.push(this.$route.query.redirect || '/')
       } catch (err) { // 所有大于等于 400 的状态码都会进入 catch
         if (err.response && err.response.status === 400) {
           this.$toast.fail('登录失败，手机号或验证码错误')

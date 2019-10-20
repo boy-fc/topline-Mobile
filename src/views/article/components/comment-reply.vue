@@ -10,15 +10,14 @@
           round
           width="4rem"
           height="4rem"
-          style="margin-right: 30px;"
           :src="comment.aut_photo"
         />
-        <span style="color: #466b9d; font-size:25px" slot="title">{{comment.aut_name}}</span>
+        <span style="color: #466b9d;" slot="title">{{comment.aut_name}}</span>
         <div slot="label">
-          <p style="color: #363636;font-size:25px">{{comment.content}}</p>
+          <p style="color: #363636;">{{comment.content}}</p>
           <p>
-            <span style="margin-right: 10px;font-size:20px">{{comment.pubdate| relativeTime}}</span>
-            <van-button size="mini" type="default" style="font-size:20px"
+            <span class="spanStyle">{{comment.pubdate| relativeTime}}</span>
+            <van-button size="mini" type="default"
            >回复{{ comment.reply_count }}</van-button>
           </p>
         </div>
@@ -44,18 +43,13 @@
           round
           width="4em"
           height="4em"
-          style="margin-right: 30px;"
           :src="item.aut_photo"
         />
-        <span style="color: #466b9d;font-size:25px" slot="title">hello</span>
+        <span style="color: #466b9d;" slot="title">hello</span>
         <div slot="label">
-          <p style="color: #363636;font-size:25px">{{ item.content }}</p>
+          <p style="color: #363636;">{{ item.content }}</p>
           <p>
-            <span style="margin-right: 10px;font-size:20px">{{ item.pubdate | relativeTime }}</span>
-            <!-- <van-button
-              size="mini"  style="font-size:20px"
-              type="default"
-            >回复 {{ item.reply_count }}</van-button> -->
+            <span class="dayStyle">{{ item.pubdate | relativeTime }}</span>
           </p>
         </div>
         <van-icon
@@ -155,8 +149,19 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.dayStyle{
+  margin-right: 10px;
+  font-size:20px
+}
+.spanStyle {
+  margin-right: 10px;
+  font-size:20px
+}
 /deep/ .van-cell {
     padding: 20px 50px;
+}
+/deep/ .van-cell__label{
+  font-size: 25px;
 }
 .publish-wrap {
   position: fixed;
@@ -173,6 +178,9 @@ export default {
     height: 44px;
     font-size: 25px;
   }
+}
+/deep/ .van-image--round{
+  margin-right: 30px;
 }
 .van-list {
   margin-bottom: 45px;
